@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 langchain
+langchain-community
 openai
 chromadb
 pydantic
