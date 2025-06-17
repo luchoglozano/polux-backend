@@ -23,23 +23,8 @@ def load_qa_chain():
     persist_directory = "./chroma_db"
     
     # Verifica si ya existe la base persistida
-    if not os.path.exists(persist_directory):
-        os.makedirs(persist_directory, exist_ok=True)
-        # Carga todos los PDF desde la carpeta /docs
-        all_docs = []
-        for file in os.listdir("./docs"):
-            if file.endswith(".pdf"):
-                loader = PyPDFLoader(os.path.join("./docs", file))
-                all_docs.extend(loader.load())
+    vectordb = Chroma(persist_directory=persist_directory, embedding_function=OpenAIEmbeddings())
 
-        # Divide el texto en chunks
-        splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        chunks = splitter.split_documents(all_docs)
-
-        # Crea el vectorstore y guarda
-        vectordb = Chroma.from_documents(documents=chunks, embedding=OpenAIEmbeddings(), persist_directory=persist_directory)
-        vectordb.persist()
-    else:
         vectordb = Chroma(persist_directory=persist_directory, embedding_function=OpenAIEmbeddings())
 
     retriever = vectordb.as_retriever()
