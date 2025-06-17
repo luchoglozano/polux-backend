@@ -10,6 +10,9 @@ from langchain_openai import ChatOpenAI
 import os
 
 app = FastAPI()
+@app.get("/")
+def read_root():
+    return {"message": "POLUX backend operativo"}
 
 class AskRequest(BaseModel):
     question: str
