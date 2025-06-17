@@ -25,7 +25,7 @@ def load_qa_chain():
     # Verifica si ya existe la base persistida
     vectordb = Chroma(persist_directory=persist_directory, embedding_function=OpenAIEmbeddings())
 
-        vectordb = Chroma(persist_directory=persist_directory, embedding_function=OpenAIEmbeddings())
+    vectordb = Chroma(persist_directory=persist_directory, embedding_function=OpenAIEmbeddings())
 
     retriever = vectordb.as_retriever()
     qa_chain = RetrievalQA.from_chain_type(
